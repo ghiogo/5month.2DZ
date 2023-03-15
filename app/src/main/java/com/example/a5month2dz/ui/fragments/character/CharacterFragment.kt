@@ -1,4 +1,4 @@
-package com.example.a5month2dz.ui.fragments
+package com.example.a5month2dz.ui.fragments.character
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,24 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a5month2dz.R
 import com.example.a5month2dz.databinding.FragmentCharacterBinding
-import com.example.a5month2dz.databinding.FragmentEpisodeBinding
 import com.example.a5month2dz.ui.adapters.CharacterAdapter
-import com.example.a5month2dz.ui.adapters.EpisodeAdapter
 
-class EpisodeFragment : Fragment() {
+class CharacterFragment : Fragment() {
 
-    private var viewModel: EpisodeViewModel? = null
-    private lateinit var binding: FragmentEpisodeBinding
-    private var episodeAdapter = EpisodeAdapter()
+    private var viewModel: CharacterViewModel? = null
+    private lateinit var binding: FragmentCharacterBinding
+    private var characterAdapter = CharacterAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEpisodeBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[EpisodeViewModel::class.java]
+        binding = FragmentCharacterBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[CharacterViewModel::class.java]
         return binding.root
     }
 
@@ -35,15 +32,15 @@ class EpisodeFragment : Fragment() {
     }
 
     private fun initialize() {
-        binding.rvEpisode.apply {
+        binding.rvCharacter.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = episodeAdapter
+            adapter = characterAdapter
         }
     }
 
     private fun setupObserves() {
-        viewModel?.fetchEpisode()?.observe(viewLifecycleOwner) {
-            episodeAdapter.setList(it.results)
+        viewModel?.fetchCharacter()?.observe(viewLifecycleOwner) {
+            characterAdapter.setList(it.results)
         }
     }
 }

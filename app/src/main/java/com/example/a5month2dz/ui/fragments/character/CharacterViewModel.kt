@@ -1,10 +1,10 @@
-package com.example.a5month2dz.ui.fragments
+package com.example.a5month2dz.ui.fragments.character
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.a5month2dz.App
-import com.example.a5month2dz.data.model.CharacterModel
-import com.example.a5month2dz.data.model.RickAndMortyResponse
+import com.example.a5month2dz.data.models.CharacterModel
+import com.example.a5month2dz.data.models.RickAndMortyResponse
 import retrofit2.Call
 import retrofit2.Response
 

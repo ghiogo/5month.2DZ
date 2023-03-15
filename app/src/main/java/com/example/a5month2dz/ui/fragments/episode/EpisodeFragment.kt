@@ -1,4 +1,4 @@
-package com.example.a5month2dz.ui.fragments
+package com.example.a5month2dz.ui.fragments.episode
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,21 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a5month2dz.databinding.FragmentLocationBinding
-import com.example.a5month2dz.ui.adapters.LocationAdapter
+import com.example.a5month2dz.databinding.FragmentEpisodeBinding
+import com.example.a5month2dz.ui.adapters.EpisodeAdapter
 
-class LocationFragment : Fragment() {
+class EpisodeFragment : Fragment() {
 
-    private var viewModel: LocationViewModel? = null
-    private lateinit var binding: FragmentLocationBinding
-    private var locationAdapter= LocationAdapter()
+    private var viewModel: EpisodeViewModel? = null
+    private lateinit var binding: FragmentEpisodeBinding
+    private var episodeAdapter = EpisodeAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLocationBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[LocationViewModel::class.java]
+        binding = FragmentEpisodeBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[EpisodeViewModel::class.java]
         return binding.root
     }
 
@@ -32,15 +32,15 @@ class LocationFragment : Fragment() {
     }
 
     private fun initialize() {
-        binding.rvLocation.apply {
+        binding.rvEpisode.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = locationAdapter
+            adapter = episodeAdapter
         }
     }
 
     private fun setupObserves() {
-        viewModel?.fetchLocation()?.observe(viewLifecycleOwner){
-            locationAdapter.setList(it.results)
+        viewModel?.fetchEpisode()?.observe(viewLifecycleOwner) {
+            episodeAdapter.setList(it.results)
         }
     }
 }

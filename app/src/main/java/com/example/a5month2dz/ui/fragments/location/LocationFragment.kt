@@ -1,4 +1,4 @@
-package com.example.a5month2dz.ui.fragments
+package com.example.a5month2dz.ui.fragments.location
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,21 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a5month2dz.databinding.FragmentCharacterBinding
-import com.example.a5month2dz.ui.adapters.CharacterAdapter
+import com.example.a5month2dz.databinding.FragmentLocationBinding
+import com.example.a5month2dz.ui.adapters.LocationAdapter
 
-class CharacterFragment : Fragment() {
+class LocationFragment : Fragment() {
 
-    private var viewModel: CharacterViewModel? = null
-    private lateinit var binding: FragmentCharacterBinding
-    private var characterAdapter = CharacterAdapter()
+    private var viewModel: LocationViewModel? = null
+    private lateinit var binding: FragmentLocationBinding
+    private var locationAdapter= LocationAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCharacterBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[CharacterViewModel::class.java]
+        binding = FragmentLocationBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[LocationViewModel::class.java]
         return binding.root
     }
 
@@ -32,15 +32,15 @@ class CharacterFragment : Fragment() {
     }
 
     private fun initialize() {
-        binding.rvCharacter.apply {
+        binding.rvLocation.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = characterAdapter
+            adapter = locationAdapter
         }
     }
 
     private fun setupObserves() {
-        viewModel?.fetchCharacter()?.observe(viewLifecycleOwner) {
-            characterAdapter.setList(it.results)
+        viewModel?.fetchLocation()?.observe(viewLifecycleOwner){
+            locationAdapter.setList(it.results)
         }
     }
 }

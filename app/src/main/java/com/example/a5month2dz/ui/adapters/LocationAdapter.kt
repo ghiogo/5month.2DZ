@@ -3,7 +3,7 @@ package com.example.a5month2dz.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a5month2dz.data.model.LocationModel
+import com.example.a5month2dz.data.models.LocationModel
 import com.example.a5month2dz.databinding.ItemLocationBinding
 
 class LocationAdapter : RecyclerView.Adapter<LocationAdapter.ViewHolder>() {
