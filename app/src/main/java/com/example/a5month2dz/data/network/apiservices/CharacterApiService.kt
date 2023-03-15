@@ -1,7 +1,7 @@
 package com.example.a5month2dz.data.network.apiservices
 
-import com.example.a5month2dz.data.models.CharacterModel
-import com.example.a5month2dz.data.models.RickAndMortyResponse
+import com.example.a5month2dz.models.CharacterModel
+import com.example.a5month2dz.models.RickAndMortyResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

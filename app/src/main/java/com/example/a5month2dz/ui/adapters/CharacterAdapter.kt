@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.a5month2dz.data.models.CharacterModel
+import com.example.a5month2dz.models.CharacterModel
 import com.example.a5month2dz.databinding.ItemCharacterBinding
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {

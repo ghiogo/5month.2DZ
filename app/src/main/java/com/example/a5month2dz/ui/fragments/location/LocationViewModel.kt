@@ -3,8 +3,8 @@ package com.example.a5month2dz.ui.fragments.location
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.a5month2dz.App
-import com.example.a5month2dz.data.models.LocationModel
-import com.example.a5month2dz.data.models.RickAndMortyResponse
+import com.example.a5month2dz.models.LocationModel
+import com.example.a5month2dz.models.RickAndMortyResponse
 import retrofit2.Call
 import retrofit2.Response
 

@@ -3,7 +3,7 @@ package com.example.a5month2dz.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a5month2dz.data.models.EpisodeModel
+import com.example.a5month2dz.models.EpisodeModel
 import com.example.a5month2dz.databinding.ItemEpisodeBinding
 
 class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.ViewHolder>() {
