@@ -2,40 +2,60 @@ package com.example.a5month2dz.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.a5month2dz.models.CharacterModel
 import com.example.a5month2dz.databinding.ItemCharacterBinding
+import com.example.a5month2dz.extensions.setImage
 
-class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
+class CharacterAdapter : PagingDataAdapter<CharacterModel, CharacterAdapter.ViewHolder>(diffUtil) {
 
-    private var list: List<CharacterModel> = ArrayList()
-
-    fun setList(list: List<CharacterModel>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
-
-    class ViewHolder(private val binding: ItemCharacterBinding) :
+    inner class ViewHolder(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(characterModel: CharacterModel) {
-            binding.itemCharacterName.text = characterModel.name
-            binding.itemCharacterType.text = characterModel.type
-            binding.itemCharacterId.text = characterModel.id.toString()
-            Glide.with(binding.imageCharacter.context).load(characterModel.image)
-                .into(binding.imageCharacter)
+        fun onBind(item: CharacterModel?) {
+            binding.itemCharacterName.text = item?.name
+            binding.itemCharacterId.text = item?.id.toString()
+            binding.itemCharacterType.text = item?.type
+            binding.imageCharacter.setImage(item!!.image)
         }
+
+//        init {
+//            itemView.setOnClickListener {
+//                getItem(absoluteAdapterPosition).let { character -> onCh }
+//            }
+//        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterAdapter.ViewHolder {
         return ViewHolder(
-            ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCharacterBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(list[position])
+    override fun onBindViewHolder(holder: CharacterAdapter.ViewHolder, position: Int) {
+        holder.onBind(getItem(position))
     }
 
-    override fun getItemCount(): Int = list.size
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<CharacterModel>() {
+            override fun areItemsTheSame(
+                oldItem: CharacterModel,
+                newItem: CharacterModel
+            ): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(
+                oldItem: CharacterModel,
+                newItem: CharacterModel
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
 }

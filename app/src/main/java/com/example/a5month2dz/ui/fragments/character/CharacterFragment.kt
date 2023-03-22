@@ -1,46 +1,37 @@
 package com.example.a5month2dz.ui.fragments.character
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.a5month2dz.R
+import com.example.a5month2dz.base.BaseFragment
 import com.example.a5month2dz.databinding.FragmentCharacterBinding
 import com.example.a5month2dz.ui.adapters.CharacterAdapter
+import kotlinx.coroutines.launch
 
-class CharacterFragment : Fragment() {
+class CharacterFragment :
+    BaseFragment<FragmentCharacterBinding, CharacterViewModel>(R.layout.fragment_character) {
 
-    private var viewModel: CharacterViewModel? = null
-    private lateinit var binding: FragmentCharacterBinding
     private var characterAdapter = CharacterAdapter()
+    override val binding by viewBinding(FragmentCharacterBinding::bind)
+    override val viewModel: CharacterViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCharacterBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[CharacterViewModel::class.java]
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize()
-        setupObserves()
-    }
-
-    private fun initialize() {
+    override fun initialize() {
         binding.rvCharacter.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = characterAdapter
         }
     }
 
-    private fun setupObserves() {
-        viewModel?.fetchCharacter()?.observe(viewLifecycleOwner) {
-            characterAdapter.setList(it.results)
+    override fun setupObserver() {
+        lifecycleScope.launch {
+            viewModel.fetchCharacter().collect {
+                characterAdapter.submitData(it)
+            }
         }
     }
 }
+//    fun characterOnItemClick(id: Int) {
+//        findNavController().navigate(R.id.action_characterFragment_to_detailCharacterFragment)
+//    }

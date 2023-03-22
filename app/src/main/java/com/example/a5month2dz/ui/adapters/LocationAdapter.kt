@@ -2,38 +2,53 @@ package com.example.a5month2dz.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5month2dz.models.LocationModel
 import com.example.a5month2dz.databinding.ItemLocationBinding
 
-class LocationAdapter : RecyclerView.Adapter<LocationAdapter.ViewHolder>() {
+class LocationAdapter : PagingDataAdapter<LocationModel, LocationAdapter.ViewHolder>(diffUtil) {
 
-    private var list: List<LocationModel> = ArrayList()
-
-    fun setList(list: List<LocationModel>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
-
-    class ViewHolder(private val binding: ItemLocationBinding) :
+    inner class ViewHolder(private val binding: ItemLocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(locationModel: LocationModel) {
-            binding.itemLocationName.text = locationModel.name
-            binding.itemLocationType.text = locationModel.type
-            binding.itemLocationCreated.text = locationModel.created
-            binding.itemLocationDimension.text = locationModel.dimension
+        fun onBind(item: LocationModel?) {
+            binding.itemLocationName.text = item?.name
+            binding.itemLocationType.text = item?.type
+            binding.itemLocationCreated.text = item?.created
+            binding.itemLocationDimension.text = item?.dimension
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationAdapter.ViewHolder {
         return ViewHolder(
-            ItemLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemLocationBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(list[position])
+    override fun onBindViewHolder(holder: LocationAdapter.ViewHolder, position: Int) {
+        holder.onBind(getItem(position))
     }
 
-    override fun getItemCount(): Int = list.size
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<LocationModel>() {
+            override fun areItemsTheSame(
+                oldItem: LocationModel,
+                newItem: LocationModel
+            ): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(
+                oldItem: LocationModel,
+                newItem: LocationModel
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
 }

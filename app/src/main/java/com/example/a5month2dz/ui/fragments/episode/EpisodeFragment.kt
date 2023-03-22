@@ -1,46 +1,38 @@
 package com.example.a5month2dz.ui.fragments.episode
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.a5month2dz.R
+import com.example.a5month2dz.base.BaseFragment
 import com.example.a5month2dz.databinding.FragmentEpisodeBinding
 import com.example.a5month2dz.ui.adapters.EpisodeAdapter
+import kotlinx.coroutines.launch
 
-class EpisodeFragment : Fragment() {
+class EpisodeFragment :
+    BaseFragment<FragmentEpisodeBinding, EpisodeViewModel>(R.layout.fragment_episode) {
 
-    private var viewModel: EpisodeViewModel? = null
-    private lateinit var binding: FragmentEpisodeBinding
+    override val binding by viewBinding(FragmentEpisodeBinding::bind)
+    override val viewModel: EpisodeViewModel by viewModels()
     private var episodeAdapter = EpisodeAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentEpisodeBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[EpisodeViewModel::class.java]
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize()
-        setupObserves()
-    }
-
-    private fun initialize() {
+    override fun initialize() {
         binding.rvEpisode.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = episodeAdapter
         }
     }
 
-    private fun setupObserves() {
-        viewModel?.fetchEpisode()?.observe(viewLifecycleOwner) {
-            episodeAdapter.setList(it.results)
+    override fun setupObserver() {
+        lifecycleScope.launch {
+            viewModel.fetchEpisode().collect {
+                episodeAdapter.submitData(it)
+            }
         }
     }
 }
+
+//    fun episodeOnItemClick(id: Int) {
+//        findNavController().navigate(R.id.action_episodeFragment_to_detailEpisodeFragment)
+//    }

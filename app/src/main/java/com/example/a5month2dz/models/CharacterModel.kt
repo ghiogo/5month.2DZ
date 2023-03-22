@@ -3,6 +3,7 @@ package com.example.a5month2dz.models
 import com.google.gson.annotations.SerializedName
 
 data class CharacterModel(
+
     @SerializedName("id")
     val id: Int,
 

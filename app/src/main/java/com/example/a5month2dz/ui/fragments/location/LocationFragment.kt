@@ -1,46 +1,38 @@
 package com.example.a5month2dz.ui.fragments.location
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.a5month2dz.R
+import com.example.a5month2dz.base.BaseFragment
 import com.example.a5month2dz.databinding.FragmentLocationBinding
 import com.example.a5month2dz.ui.adapters.LocationAdapter
+import kotlinx.coroutines.launch
 
-class LocationFragment : Fragment() {
+class LocationFragment :
+    BaseFragment<FragmentLocationBinding, LocationViewModel>(R.layout.fragment_location) {
 
-    private var viewModel: LocationViewModel? = null
-    private lateinit var binding: FragmentLocationBinding
-    private var locationAdapter= LocationAdapter()
+    override val binding by viewBinding(FragmentLocationBinding::bind)
+    override val viewModel: LocationViewModel by viewModels()
+    private var locationAdapter = LocationAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentLocationBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[LocationViewModel::class.java]
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize()
-        setupObserves()
-    }
-
-    private fun initialize() {
+    override fun initialize() {
         binding.rvLocation.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = locationAdapter
         }
     }
 
-    private fun setupObserves() {
-        viewModel?.fetchLocation()?.observe(viewLifecycleOwner){
-            locationAdapter.setList(it.results)
+    override fun setupObserver() {
+        lifecycleScope.launch {
+            viewModel.fetchLocation().collect {
+                locationAdapter.submitData(it)
+            }
         }
     }
 }
+//    fun locationOnItemClick(id: Int) {
+//        findNavController().navigate(R.id.action_locationFragment_to_detailLocationFragment)
+//    }
