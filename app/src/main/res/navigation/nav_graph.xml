@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailCharacterFragment"
-        android:name="com.example.a5month2dz.ui.fragments.detail.DetailCharacterFragment"
+        android:name="com.example.a5month2dz.ui.fragments.character.detail.DetailCharacterFragment"
         android:label="fragment_detail_character"
         tools:layout="@layout/fragment_detail_character" >
         <argument
@@ -51,12 +51,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailEpisodeFragment"
-        android:name="com.example.a5month2dz.ui.fragments.detail.DetailEpisodeFragment"
+        android:name="com.example.a5month2dz.ui.fragments.episode.detail.DetailEpisodeFragment"
         android:label="fragment_detail_episode"
         tools:layout="@layout/fragment_detail_episode" />
     <fragment
         android:id="@+id/detailLocationFragment"
-        android:name="com.example.a5month2dz.ui.fragments.detail.DetailLocationFragment"
+        android:name="com.example.a5month2dz.ui.fragments.location.detail.DetailLocationFragment"
         android:label="fragment_detail_location"
         tools:layout="@layout/fragment_detail_location" />
 

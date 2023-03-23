@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#25252E"
-    tools:context=".ui.fragments.detail.DetailEpisodeFragment">
+    tools:context=".ui.fragments.episode.detail.DetailEpisodeFragment">
 
     <TextView
         android:id="@+id/character_detail_id"

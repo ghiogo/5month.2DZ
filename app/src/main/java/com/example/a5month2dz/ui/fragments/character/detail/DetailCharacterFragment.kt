@@ -1,4 +1,4 @@
-package com.example.a5month2dz.ui.fragments.detail
+package com.example.a5month2dz.ui.fragments.character.detail
 
 
 import com.example.a5month2dz.R
