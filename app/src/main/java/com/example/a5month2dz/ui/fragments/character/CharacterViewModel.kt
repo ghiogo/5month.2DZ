@@ -8,6 +8,7 @@ import com.example.a5month2dz.data.repositories.CharacterRepository
 class CharacterViewModel : ViewModel() {
 
     private val characterRepository = CharacterRepository()
+
     fun fetchCharacter() = characterRepository.fetchCharacters().cachedIn(viewModelScope)
 }
 

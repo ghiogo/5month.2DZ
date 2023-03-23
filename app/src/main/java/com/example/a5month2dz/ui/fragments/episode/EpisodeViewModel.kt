@@ -7,7 +7,7 @@ import com.example.a5month2dz.data.repositories.EpisodeRepository
 
 class EpisodeViewModel : ViewModel() {
 
-    private  val episodeRepository = EpisodeRepository()
+    private val episodeRepository = EpisodeRepository()
 
     fun fetchEpisode() = episodeRepository.fetchEpisode().cachedIn(viewModelScope)
-    }
+}

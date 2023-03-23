@@ -20,6 +20,7 @@ class EpisodeRepository {
                 EpisodePagingSources(App.episodeApiService!!)
             }).flow
     }
+}
 
 //    fun fetchOneEpisode(id: Int): MutableLiveData<EpisodeModel> {
 //        val data: MutableLiveData<EpisodeModel> = MutableLiveData()
@@ -42,4 +43,3 @@ class EpisodeRepository {
 //        })
 //        return data
 //    }
-}

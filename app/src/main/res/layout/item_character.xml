@@ -11,10 +11,10 @@
         android:id="@+id/image_character"
         android:layout_width="140dp"
         android:layout_height="155dp"
+        android:contentDescription="@string/todo"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_character_name"
@@ -45,9 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="60dp"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_character"
         app:layout_constraintTop_toBottomOf="@id/item_character_name"

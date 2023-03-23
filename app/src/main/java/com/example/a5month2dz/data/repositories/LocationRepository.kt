@@ -20,6 +20,7 @@ class LocationRepository {
                 LocationPagingSources(App.locationApiService!!)
             }).flow
     }
+}
 
 //    fun fetchOneLocation(id: Int): MutableLiveData<LocationModel> {
 //        val data: MutableLiveData<LocationModel> = MutableLiveData()
@@ -42,4 +43,3 @@ class LocationRepository {
 //        })
 //        return data
 //    }
-}

@@ -5,10 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a5month2dz.databinding.ItemCharacterBinding
 import com.example.a5month2dz.models.EpisodeModel
 import com.example.a5month2dz.databinding.ItemEpisodeBinding
-import com.example.a5month2dz.models.CharacterModel
 
 class EpisodeAdapter : PagingDataAdapter<EpisodeModel, EpisodeAdapter.ViewHolder>(diffUtil) {
 
