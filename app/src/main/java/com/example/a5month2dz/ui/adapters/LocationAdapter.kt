@@ -2,13 +2,14 @@ package com.example.a5month2dz.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a5month2dz.models.LocationModel
 import com.example.a5month2dz.databinding.ItemLocationBinding
+import com.example.a5month2dz.models.LocationModel
 
-class LocationAdapter : PagingDataAdapter<LocationModel, LocationAdapter.ViewHolder>(diffUtil) {
+class LocationAdapter(val onLocationItemClick: (id: Int) -> Unit) :
+    ListAdapter<LocationModel, LocationAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemLocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -17,6 +18,13 @@ class LocationAdapter : PagingDataAdapter<LocationModel, LocationAdapter.ViewHol
             binding.itemLocationType.text = item?.type
             binding.itemLocationCreated.text = item?.created
             binding.itemLocationDimension.text = item?.dimension
+        }
+        init {
+            itemView.setOnClickListener {
+                getItem(absoluteAdapterPosition).let { episode ->
+                    onLocationItemClick(episode.id)
+                }
+            }
         }
     }
 

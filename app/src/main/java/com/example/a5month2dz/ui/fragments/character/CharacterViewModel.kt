@@ -1,14 +1,17 @@
 package com.example.a5month2dz.ui.fragments.character
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
 import com.example.a5month2dz.data.repositories.CharacterRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CharacterViewModel : ViewModel() {
+@HiltViewModel
+class CharacterViewModel @Inject constructor(
+    private val characterRepository: CharacterRepository
+) : ViewModel() {
 
-    private val characterRepository = CharacterRepository()
+    fun fetchCharacters() = characterRepository.fetchCharacters()
 
-    fun fetchCharacter() = characterRepository.fetchCharacters().cachedIn(viewModelScope)
+    fun getAll() = characterRepository.getAll()
 }
 

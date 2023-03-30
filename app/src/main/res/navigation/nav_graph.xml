@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/characterFragment">
 
     <fragment
@@ -10,6 +10,7 @@
         android:name="com.example.a5month2dz.ui.fragments.character.CharacterFragment"
         android:label="fragment_character"
         tools:layout="@layout/fragment_character" >
+
         <action
             android:id="@+id/action_characterFragment_to_detailCharacterFragment"
             app:destination="@id/detailCharacterFragment" />
@@ -30,34 +31,40 @@
         android:name="com.example.a5month2dz.ui.fragments.location.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" >
+
         <action
             android:id="@+id/action_locationFragment_to_detailLocationFragment"
             app:destination="@id/detailLocationFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailCharacterFragment"
-        android:name="com.example.a5month2dz.ui.fragments.character.detail.DetailCharacterFragment"
+        android:name="com.example.a5month2dz.ui.fragments.character.detail.CharacterDetailFragment"
         android:label="fragment_detail_character"
         tools:layout="@layout/fragment_detail_character" >
-        <argument
-            android:name="image"
-            app:argType="string" />
-        <argument
-            android:name="name"
-            app:argType="string" />
         <argument
             android:name="id"
             app:argType="integer" />
     </fragment>
+
     <fragment
         android:id="@+id/detailEpisodeFragment"
-        android:name="com.example.a5month2dz.ui.fragments.episode.detail.DetailEpisodeFragment"
+        android:name="com.example.a5month2dz.ui.fragments.episode.detail.EpisodeDetailFragment"
         android:label="fragment_detail_episode"
-        tools:layout="@layout/fragment_detail_episode" />
+        tools:layout="@layout/fragment_detail_episode">
+    <argument
+        android:name="id"
+        app:argType="integer" />
+</fragment>
+
     <fragment
         android:id="@+id/detailLocationFragment"
-        android:name="com.example.a5month2dz.ui.fragments.location.detail.DetailLocationFragment"
+        android:name="com.example.a5month2dz.ui.fragments.location.detail.LocationDetailFragment"
         android:label="fragment_detail_location"
-        tools:layout="@layout/fragment_detail_location" />
+        tools:layout="@layout/fragment_detail_location" >
+    <argument
+        android:name="id"
+        app:argType="integer" />
+    </fragment>
 
 </navigation>

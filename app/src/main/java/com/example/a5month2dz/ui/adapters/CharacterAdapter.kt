@@ -2,14 +2,15 @@ package com.example.a5month2dz.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5month2dz.models.CharacterModel
 import com.example.a5month2dz.databinding.ItemCharacterBinding
 import com.example.a5month2dz.extensions.setImage
 
-class CharacterAdapter : PagingDataAdapter<CharacterModel, CharacterAdapter.ViewHolder>(diffUtil) {
+class CharacterAdapter(val onCharacterItemClick: (id: Int) -> Unit) :
+    ListAdapter<CharacterModel, CharacterAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -19,12 +20,11 @@ class CharacterAdapter : PagingDataAdapter<CharacterModel, CharacterAdapter.View
             binding.itemCharacterType.text = item?.type
             binding.imageCharacter.setImage(item!!.image)
         }
-
-//        init {
-//            itemView.setOnClickListener {
-//                getItem(absoluteAdapterPosition).let { character -> onCh }
-//            }
-//        }
+        init {
+            itemView.setOnClickListener {
+                getItem(absoluteAdapterPosition).let { character -> onCharacterItemClick(character.id) }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterAdapter.ViewHolder {

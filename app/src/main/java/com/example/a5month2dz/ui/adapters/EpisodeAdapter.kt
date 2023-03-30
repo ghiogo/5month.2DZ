@@ -2,13 +2,13 @@ package com.example.a5month2dz.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5month2dz.models.EpisodeModel
 import com.example.a5month2dz.databinding.ItemEpisodeBinding
 
-class EpisodeAdapter : PagingDataAdapter<EpisodeModel, EpisodeAdapter.ViewHolder>(diffUtil) {
+class EpisodeAdapter(val onEpisodeItemClick: (id : Int) -> Unit) : ListAdapter<EpisodeModel, EpisodeAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemEpisodeBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -17,6 +17,12 @@ class EpisodeAdapter : PagingDataAdapter<EpisodeModel, EpisodeAdapter.ViewHolder
             binding.itemEpisode.text = item?.episode
             binding.itemEpisodeCreated.text = item?.created
             binding.itemEpisodeAirDate.text = item?.air_date
+        }
+        init {
+            itemView.setOnClickListener {
+                getItem(absoluteAdapterPosition).let { episode -> onEpisodeItemClick(episode.id)
+                }
+            }
         }
     }
 

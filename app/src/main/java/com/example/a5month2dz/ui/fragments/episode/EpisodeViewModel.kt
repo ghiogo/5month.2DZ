@@ -1,13 +1,17 @@
 package com.example.a5month2dz.ui.fragments.episode
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
 import com.example.a5month2dz.data.repositories.EpisodeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EpisodeViewModel : ViewModel() {
+@HiltViewModel
+class EpisodeViewModel @Inject constructor(
+    private val episodeRepository: EpisodeRepository
+) : ViewModel() {
 
-    private val episodeRepository = EpisodeRepository()
+    fun fetchEpisode() = episodeRepository.fetchEpisode()
 
-    fun fetchEpisode() = episodeRepository.fetchEpisode().cachedIn(viewModelScope)
+    fun getAll() = episodeRepository.getAll()
 }
+

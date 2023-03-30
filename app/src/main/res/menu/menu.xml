@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/characterFragment"
+        android:id="@+id/characterFragments"
         android:icon="@drawable/character"
         android:title="Character" />
 

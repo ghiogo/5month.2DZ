@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="false"
         android:theme="@style/Animation.Design.BottomSheetDialog">
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
